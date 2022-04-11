@@ -1988,18 +1988,26 @@ input, select, textarea {
 /* Wrappers */
 
 
-.sidebar {
-	height: 100%;
-	width: 20em;
-	position: absolute;
-	left: 75em;
-	top: 1em;
-	bottom: 0em;
-	padding-top: 10em;
-	background-color: #fafafa;
-	border-left: #242424;
-	}
-	
+	.sidebar {
+		height: 100%;
+		width: 100%;
+		padding-top: 0em;
+		background-color: #fafafa;
+		}
+		
+		@media screen and (min-width: 1064px) {
+			.sidebar {
+				height: 100%;
+				width: 20em;
+				position: absolute;
+				left: 75em;
+				top: 1em;
+				bottom: 0em;
+				padding-top: 10em;
+				background-color: #fafafa;
+				border-left: #242424;
+				}
+		}
 	
 
 	.wrapper {
