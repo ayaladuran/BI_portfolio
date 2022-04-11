@@ -1989,13 +1989,13 @@ input, select, textarea {
 
 
 .sidebar {
-	height: 139.869%;
-	width: 319px;
+	height: 100%;
+	width: 20em;
 	position: absolute;
-	left: 1200px;
-	top: 40px;
+	left: 75em;
+	top: 1em;
 	bottom: 0em;
-	padding-top: 160px;
+	padding-top: 10em;
 	background-color: #fafafa;
 	border-left: #242424;
 	}
@@ -2018,7 +2018,7 @@ input, select, textarea {
 
 		.wrapper.style2 {
 			background-color: #fff;
-			max-width: 1200px;
+			max-width: 75em;
 			text-shadow: 1px 1px 0px #fff;
 			padding-top: 4em;
 			padding-bottom: 4em;
