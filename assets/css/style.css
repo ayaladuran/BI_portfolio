@@ -1998,7 +1998,7 @@ input, select, textarea {
 		@media screen and (min-width: 1064px) {
 			.sidebar {
 				height: 100%;
-				width: 20em;
+				width: 15em;
 				position: absolute;
 				left: 75em;
 				top: 1em;
@@ -2029,7 +2029,7 @@ input, select, textarea {
 			max-width: 75em;
 			text-shadow: 1px 1px 0px #fff;
 			padding-top: 4em;
-			padding-bottom: 4em;
+			padding-bottom: 2em;
 		}
 
 		.wrapper.style3 {
