@@ -57,7 +57,7 @@
 						<i>"You can only improve, what you can measure"</i> said my 2012 self, all sold on Lean Manufacturing. <br><br>	
 
 						Fast forward to my 2021 self, I commited to put my department's KPIs into a scorecard in Goals for our Fiscal year 2023 (To start in Feb 2022). <br>
-						As I started deploying our brand new KPIs, I faced the <b>first big challenge</b>. Creating goals massively instead of clicking and clicking (Goal name, owner, start date, due date, status, target, value) for each one . <br>
+						As I started deploying our brand new KPIs, I faced the <b>first big challenge</b>. Creating goals massively instead of clicking and clicking (Goal name, owner, start date, due date, status, target, value) for each one. <br>
 						<b>Second big challenge;</b> can I create a monthly subgoal for each KPI? Our review cycles are monthly.<br><br>
 
 						Let's do a simple math: 5-8 KPIs, 12 months, 8 employees... we are talking about more than 500 goals. And this is only one small department. Imagine a sales force of 300 reps and 20 regional managers <br><br>
@@ -99,6 +99,20 @@
 						color: black;">
 						So here is my walkthrough on how to create multiple Power BI Goals in a single script.
 						<br>
+
+						<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						font-weight:600;
+						color: black;">
+						The scenario</p>
+
+						<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						color: black;">
 						For this example, I will create a Revenue vs Budget KPI for each Brand on the <a href = 'Sales Report.html'>Contoso dataset </a> for 2019:
 
 						<p style=
@@ -114,7 +128,7 @@
 						margin-left: 5em; 
 						font-size: 0.9em; 
 						color: black;">
-						I will omit the part of the walkthrough on how to create a scorecard, assuming you already know how to do it and how Power BI Goals works in general. If you don't, please refer to <a href = 'https://www.youtube.com/watch?v=NzE63dJKe5Y'>Tommy Puglia's series in YouTube</a>.
+						I will omit the part of the walkthrough on how to create a scorecard, assuming you already know how to do it and how Power BI Goals works in general. If you don't, please refer to <a href = 'https://www.youtube.com/watch?v=NzE63dJKe5Y'>this Tommy Puglia's series in YouTube</a>.
 						<br><br>
 
 						After you name and add the description to your scorecard, it will automatically take you to the next screen to create your first goal. Cancel this and you will have a blank scorecard that looks like this.
@@ -169,7 +183,11 @@
 						margin-left: 5em; 
 						font-size: 0.9em; 
 						color: black;">
-						Once the variables are defined, save your Powershell script and run it. The end-result should look like this in your PowerShell screen:
+						First, you need to connect to your Power BI account using the cmdlet 'Connect-PowerBIServiceAccount'. This is not part of the script because you only need to run it the first time to establish the connection.
+						<br><br>
+						<img src="Blog/Goals/Connect_PowerBI.png"; style="width: 250m;height: 4.18em;">
+						<br><br>
+						Then, once the variables are defined, save your Powershell script and run it. The end-result should look like this in your PowerShell screen:
 						<br><br>
 						<img src="Blog/Goals/PowerShellCompletion.png"; style="width: 40em;height: 3.18em;">
 						<br><br>
