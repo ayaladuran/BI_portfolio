@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<!--
+	Miniport by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Armando Ayala Portfolio - Blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/style.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Nav -->
+			<nav id="nav">
+				<ul class="container">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</nav>
+
+
+		<!-- Portfolio -->
+			<article id="portfolio" class="wrapper style2">
+				<div class="container">
+					<header>
+						<h2 style="font-size: 3em;">Blog</h2>
+						<p style=
+							"text-align: left; 
+							margin-left: 2em; 
+							font-size: 2em; 
+							font-weight: bold;
+							color: black;
+							padding-bottom: 0.5em;">
+								Creating multiple Power BI Goals with Powershell (Part 2)</p>
+
+						<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						font-weight: bold;
+						color: black;">
+							May 2, 2022 by Armando Ayala</p>
+					</header>
+
+
+					<footer>
+						<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						color: black;">
+						In <a href = 'Blog_PowerBIGoals.html'>my last blog</a>, I walked you through the process of creating new goals in bulk. Being these Goals pulled out of a list of dimensions in a published dataset. <br><br>
+
+						Now, it is time to create our status rules for these Goals. And for sure, we are using PowerShell to automate this part instead of doing it one by one. <br>
+
+						<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						font-weight:600;
+						color: black;">
+							The "Macro recording" method.</p>
+
+						<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						color: black;">
+						Myself, as thousands of other Power BI users, come from the world of the spreadshets. And as many Excel users, recording macros became our low-code solution to automate functions. You can really achieve anything by clicking that powerfull red circle. And if you are curious (or desperate) enough, you will then go to the VB code and try to tweak it to create even more powerful spreadshets.
+						<br><br>
+
+						For this case scenario, this is exactly how we are doing it. We are going to set one status rule using the Power BI Goals UI, and then we are going to take that code in PowerShell and replicate it, tweaking a few fields to every goal already published in order to create the rules.
+						</p>
+
+						<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						color: black;">
+						Here is the walkthrough on how to add our status rules to all our published Goals.
+						<br>
+
+						<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						font-weight:600;
+						color: black;">
+						The scenario</p>
+
+						<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						color: black;">
+						Using our <a href = 'Blog_PowerBIGoals.html'>previously created Scorecard</a>, we are adding a status rule to each of our "Revenue vs Budget" Goal. The rules will evaluate the % of target value accomplished <b>AND</b> the due date to assign any given status.
+
+						<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						font-weight:600;
+						color: black;">
+							Step 1: Create one status for a Goal</p>
+
+						<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						color: black;">
+						For a start, we are going to open our Scorecard in Power BI. Select the <b>Edit</b> button on the top and then we are going to select the first goal.
+						<br><br>
+						<img src="Blog/Goals/FirstGoal.png"; style="width: 60em;height: 14.94em;">
+						<br><br>
+						In the <b>Status</b> menu, select the option <b>Update Rules</b>
+						<br><br>
+						<img src="Blog/Goals/UpdateStatus.png"; style="width: 60em;height: 10.90em;">
+						<br><br>
+						Using the UI, assign the rules as you wish to evaluate your goals. In my case, I am using 4 rules:
+
+						<ul style=
+						"text-align: left; 
+						margin-left: 7em; 
+						font-size: 0.9em; 
+						color: black;">
+							<li>If the goal reached 100% or better, and the period is already over, the status will be "Completed" </li>
+							<li>If the goal reached between 95% and 100%, and the period is already over, the status will be "Approaching"</li>
+							<li>If the goal is below 95%, and the period is already over, the status will be "Behind"</li>
+							<li>If the period has begun, but has not ended,the status will be "In Progress"</li>
+							<li>If none of the above conditions are met, then it will default to "Not Started"</li>
+						</ul>
+						
+						
+						<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						color: black;">
+						<img src="Blog/Goals/StatusGraterBetter1.png"; style="width: 30em;height: 25.22em;">
+						<img src="Blog/Goals/StatusGraterBetter2.png"; style="width: 29.34em;height: 19.73;">
+
+						<br><br>
+						Since the period is a criteria that depends on the Start Date and Due Date of each goal, this is why we need to run a loop to obtain those dates selectively for each goal and subgoal, and to be able to add them to the new status rule.
+						</p>
+
+
+						<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						font-weight:600;
+						color: black;">
+							Step 2: Prepare your Powershell script</p>
+
+							<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						color: black;">
+						Open <a href = 'https://github.com/ayaladuran/Goals_with_Powershell/blob/main/PowerBI%20Goals%20and%20SubGoals%20Status%20Rules%20Update.ps1'>this script</a> in Powershell ISE. This script has 3 variables to add
+						<br>
+						<img src="Blog/Goals/StatusScript1.png"; style="width: 40em;height: 5.64em;">
+						<br>
+						Similar to our last script, the workspace ID and the scorecard ID are required fields. But this time, the 3rd variable we need is the Goal name, and we are going to query it under a <b>"Like"</b> operator.
+						<br><br>
+						The reason for this, is that our goals are all named the same, but with an addition of our dimension and the period we are measuring in the name. We need to use the <b>"Like"</b> operator to work as a wildcard and in this case, to include all the goals that contain "Revenue" in the name.
+						<br><br>
+						The loop will un through each goal that has a name <i>like</i> "Revenue" and it will add a JSON file replicating the status we manually created, but changing the date criteria based on each goal and subgoal dates.
+
+						<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						font-weight:600;
+						color: black;">				
+						Step 3: Run the script and enjoy</p>
+						
+						<p style=
+						"text-align: left; 
+						margin-left: 5em; 
+						font-size: 0.9em; 
+						color: black;">
+						First, you need to connect to your Power BI account using the cmdlet 'Connect-PowerBIServiceAccount'. This is not part of the script because you only need to run it the first time to establish the connection.
+						<br><br>
+						<img src="Blog/Goals/Connect_PowerBI.png"; style="width: 250m;height: 4.18em;">
+						<br><br>
+						Then, once the variables are defined, save your Powershell script and run it. The end-result should look like this in your PowerShell screen:
+						<br><br>
+						<img src="Blog/Goals/StatusUpdated.png"; style="width: 40em;height: 2.98em;">
+						<br><br>
+						Go to your scorecard and refresh. You will have your 143 status replicated, with their dates completely based on the same goal Start Date and Due Date.
+						<br><br>
+						<img src="Blog/Goals/UpdatedStatuses.gif"; style="width: 60em;height: 31.6em;">
+						<br><br>
+						The best part of this script, is that it modifies a current goal. For this example we are using it to create/update statuses, but it can be used to update the name of a Goal, the Starting date or Due Date, the owner, or even the target or current value, as long as they are not live connections.
+						<br><br>
+						According to <a href="https://powerbi.microsoft.com/en-us/blog/power-bi-april-2022-feature-summary/#post-19024-_Toc100064184">Power BI April release</a>, updating in bulk for Goals is coming within the next weeks, so we may expect to see some of this requirements solved using the UI, but for now, I hope this can optimize your Goals creation and updating.
+						<br><br>
+						The last thing that I would have love to do is to use the same logic to update the Target and Current value connections. Unfortunately, this type of POST requests are not supported yet in the Power BI REST API.
+
+						</p>
+					</p>
+				</footer>
+				</div>
+			</article>
+
+
+		<p style=
+		"text-align: left; 
+		margin-left: 5em; 
+		margin-top: 0em;
+		font-size: 0.9em; 
+		color: black;">
+
+		Did you like it? Have any comments?
+
+
+
+		<br><br> Leave your comments <a href = "https://twitter.com/data_guero/status/1519153601465110528">here</a> or contact me on my social media available below.
+		<br><br><br>
+
+		</p>
+
+		
+		<article id="sidebar" class="sidebar">
+			<div class="container">
+				<header>
+					<p style="font-weight: bold; color: black;">May 2022</p><br>
+					<p><a href = "Blog_PowerBIGoals2.html"; style="color: black; font-size: 0.9em;">Creating multiple Power BI Goals with Powershell (Part 2)</a></p>
+					<br><p style="font-weight: bold; color: black;">April 2022</p><br>
+					<p><a href = "Blog_PowerBIGoals.html"; style="color: black; font-size: 0.9em;">Creating multiple Power BI Goals with Powershell (Part 1)</a></p>
+					<br>
+					<p><a href = "Blog_SalesDashboard.html"; style="color: black; font-size: 0.9em;">Sales dashboard</a></p>
+				</header>
+			</div>
+		</article>
+
+
+		<!-- Contact -->
+			<article id="contact" class="wrapper style4">
+				<div class="container medium">
+					<header>
+							<h3>Find me on ...</h3>
+							<ul class="social">
+								<li><a href="https://twitter.com/data_guero" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="https://www.linkedin.com/in/ayaladuran/" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+								<li><a href="https://github.com/ayaladuran	" class="icon brands fa-github"><span class="label">Github</span></a></li>
+								<!--
+								<li><a href="#" class="icon solid fa-rss"><span>RSS</span></a></li>
+								<li><a href="#" class="icon brands fa-instagram"><span>Instagram</span></a></li>
+								<li><a href="#" class="icon brands fa-foursquare"><span>Foursquare</span></a></li>
+								<li><a href="#" class="icon brands fa-skype"><span>Skype</span></a></li>
+								<li><a href="#" class="icon brands fa-soundcloud"><span>Soundcloud</span></a></li>
+								<li><a href="#" class="icon brands fa-youtube"><span>YouTube</span></a></li>
+								<li><a href="#" class="icon brands fa-blogger"><span>Blogger</span></a></li>
+								<li><a href="#" class="icon brands fa-flickr"><span>Flickr</span></a></li>
+								<li><a href="#" class="icon brands fa-vimeo"><span>Vimeo</span></a></li>
+								-->
+							</ul>
+							<hr />
+							<h3>Or direct inquires</h3>
+						<p>	<a href="mailto:ayaladuran@outook.com">ayaladuran@outlook.com</a> </p>
+						</div>
+					</div>
+					<footer>
+						<ul id="copyright">
+							<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</footer>
+				</div>
+			</article>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
