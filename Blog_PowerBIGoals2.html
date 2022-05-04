@@ -69,7 +69,7 @@
 						margin-left: 5em; 
 						font-size: 0.9em; 
 						color: black;">
-						Myself, as thousands of other Power BI users, come from the world of the spreadshets. And as many Excel users, recording macros became our low-code solution to automate functions. You can really achieve anything by clicking that powerfull red circle. And if you are curious (or desperate) enough, you will then go to the VB code and try to tweak it to create even more powerful spreadshets.
+						Myself, as thousands of other Power BI users, come from the world of the spreadshets. And as many of us spreadsheetheads (pun intended), recording macros became our low-code solution to automate tasks. You can really achieve anything by clicking that powerfull red circle. And if you are curious (or desperate) enough, you will then go to the VB code and try to tweak it to create even more powerful spreadshets.
 						<br><br>
 
 						For this case scenario, this is exactly how we are doing it. We are going to set one status rule using the Power BI Goals UI, and then we are going to take that code in PowerShell and replicate it, tweaking a few fields to every goal already published in order to create the rules.
@@ -119,7 +119,7 @@
 						<br><br>
 						<img src="Blog/Goals/UpdateStatus.png"; style="width: 60em;height: 10.90em;">
 						<br><br>
-						Using the UI, assign the rules as you wish to evaluate your goals. In my case, I am using 4 rules:
+						Using the UI, assign the rules as you wish to evaluate your goals. In my case, I am using 4 rules and a default value:
 
 						<ul style=
 						"text-align: left; 
@@ -166,7 +166,7 @@
 						<br>
 						Similar to our last script, the workspace ID and the scorecard ID are required fields. But this time, the 3rd variable we need is the Goal name, and we are going to query it under a <b>"Like"</b> operator.
 						<br><br>
-						The reason for this, is that our goals are all named the same, but with an addition of our dimension and the period we are measuring in the name. We need to use the <b>"Like"</b> operator to work as a wildcard and in this case, to include all the goals that contain "Revenue" in the name.
+						The reason for this, is that all our previously created goals are named the same , but with an addition of our dimension field (Brand) and the period we are measuring in the name. We need to use the <b>"Like"</b> operator to work as a wildcard. In this case, to include all the goals that contain "Revenue" in the name.
 						<br><br>
 						The loop will un through each goal that has a name <i>like</i> "Revenue" and it will add a JSON file replicating the status we manually created, but changing the date criteria based on each goal and subgoal dates.
 
@@ -195,7 +195,7 @@
 						<br><br>
 						<img src="Blog/Goals/UpdatedStatuses.gif"; style="width: 60em;height: 31.6em;">
 						<br><br>
-						The best part of this script, is that it modifies a current goal. For this example we are using it to create/update statuses, but it can be used to update the name of a Goal, the Starting date or Due Date, the owner, or even the target or current value, as long as they are not live connections.
+						The best part of this script, is that it modifies a current goal. For this example we are using it to create/update statuses, but it can be used also to update the name of a Goal, the Starting date or Due Date, the owner, or even the target or current value, as long as they are not live connections.
 						<br><br>
 						According to <a href="https://powerbi.microsoft.com/en-us/blog/power-bi-april-2022-feature-summary/#post-19024-_Toc100064184">Power BI April release</a>, updating in bulk for Goals is coming within the next weeks, so we may expect to see some of this requirements solved using the UI, but for now, I hope this can optimize your Goals creation and updating.
 						<br><br>
@@ -219,7 +219,7 @@
 
 
 
-		<br><br> Leave your comments <a href = "https://twitter.com/data_guero/status/1519153601465110528">here</a> or contact me on my social media available below.
+		<br><br> Leave your comments <a href = "https://twitter.com/data_guero/status/1521718660519268353">here</a> or contact me on my social media available below.
 		<br><br><br>
 
 		</p>
